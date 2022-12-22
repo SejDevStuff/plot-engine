@@ -22,6 +22,8 @@ int StateManager::get_states_num()
 
 void StateManager::change_state(State& state)
 {
-    pop_state();
+    while (states.size() != 0) {
+        pop_state();
+    }
     add_state(state);
 }

@@ -5,6 +5,10 @@
 
 #include "StateManager.hpp"
 
+struct GameData {
+    StateManager stateman;
+};
+
 class Engine
 {
     private:
@@ -14,4 +18,6 @@ class Engine
         void start(int screenWidth, int screenHeight, std::string title);
         void handleEvents(sf::Event& ev);
         void addState(State& state);
+        StateManager& get_stateman() { return gd.stateman; }
+        sf::RenderWindow& get_window() { return window; }
 };

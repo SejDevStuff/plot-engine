@@ -16,4 +16,5 @@ class StateManager
         void change_state(State& state);
         int get_states_num();
         State& get_state();
+        std::vector<State*> get_states_list() { return states; }
 };

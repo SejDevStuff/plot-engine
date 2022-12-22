@@ -22,7 +22,7 @@ void Engine::start(int screenWidth, int screenHeight, std::string title)
         handleEvents(event);
         gd.stateman.get_state().update();
         window.clear();
-        gd.stateman.get_state().render(window);
+        gd.stateman.get_state().render();
         window.display();
     }
 }

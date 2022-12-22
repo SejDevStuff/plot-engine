@@ -5,10 +5,12 @@ class StateManager;
 
 class State
 {
-    private:
-        StateManager& stateman;
     public:
+        State(StateManager& stateman, sf::RenderWindow& window) : g_stateman{stateman}, g_win{window} {}
         virtual void handleEvents(sf::Event& e) = 0;
         virtual void update() = 0;
-        virtual void render(sf::RenderTarget& renderer) = 0;
+        virtual void render() = 0;
+    protected:
+        StateManager& g_stateman;
+        sf::RenderWindow& g_win;
 };
