@@ -1,20 +1,25 @@
 #pragma once
 
 #include <SFML/Graphics.hpp>
-#include <vector>
+#include <stack>
 #include <iostream>
+#include <memory>
+
+struct GameData;
 
 #include "State.hpp"
 
 class StateManager
 {
     private:
-        std::vector<State*> states;
+        std::stack<std::unique_ptr<State>> states;
     public:
-        void add_state(State& state);
+        ~StateManager();
+        void add_state(std::unique_ptr<State> state);
         void pop_state();
-        void change_state(State& state);
+        void change_state(std::unique_ptr<State> state);
         int get_states_num();
-        State& get_state();
-        std::vector<State*> get_states_list() { return states; }
+        void render();
+        void update();
+        void handleEvents(sf::Event& ev);
 };
