@@ -9,6 +9,6 @@ int main() {
     std::unique_ptr<State> mainMenu(new MainMenu(gd));
     gd.stateman.change_state(std::move(mainMenu));
 
-    e.start(400, 400, "Game");
+    e.start(1280, 720, "Game");
     return 0;
 }

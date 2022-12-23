@@ -6,10 +6,14 @@
 struct GameData;
 
 #include "StateManager.hpp"
+#include "TextureManager.hpp"
+#include "EntityManager.hpp"
+#include "Actor.hpp"
 
 struct GameData {
     StateManager stateman;
     sf::RenderWindow window;
+    TextureManager textman;
 };
 
 class Engine

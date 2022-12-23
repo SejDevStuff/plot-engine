@@ -14,7 +14,7 @@ void Engine::handleEvents(sf::Event& ev)
 void Engine::start(int screenWidth, int screenHeight, std::string title)
 {
     std::cout << "PlotEngine v1.0.0" << std::endl;
-    gd.window.create(sf::VideoMode(screenWidth, screenHeight), title);
+    gd.window.create(sf::VideoMode(screenWidth, screenHeight), title, sf::Style::Titlebar | sf::Style::Close);
     gd.window.setFramerateLimit(60);
     sf::Event event;
 
