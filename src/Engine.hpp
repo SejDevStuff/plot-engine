@@ -16,6 +16,8 @@ struct GameData {
     TextureManager textman;
 };
 
+#include "GUI.hpp"
+
 class Engine
 {
     private:

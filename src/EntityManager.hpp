@@ -20,5 +20,18 @@ class EntityManager
         Actor* get_actor(std::string name);
         void update();
         void render();
+        
+        template <class T>
+        T* get_actor_as_different_class(std::string name)
+        {
+            Actor* actor = get_actor(name);
+            if (actor == NULL)
+            {
+                return NULL;
+            }
+            T* convertedClass = dynamic_cast<T*>(actor);
+            return convertedClass;
+        }
+
         ~EntityManager();
 };

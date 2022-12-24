@@ -25,7 +25,6 @@ void Bob::update()
     {
         sprite.setTexture(*tex);
     }
-    sprite.setPosition(xPos, yPos);
 }
 
 void SecondScreen::handleEvents(sf::Event& e)
@@ -44,6 +43,7 @@ void SecondScreen::handleEvents(sf::Event& e)
 
 int changeByX = 10;
 int changeByY = 10;
+bool alreadyPressed = false;
 
 void SecondScreen::update()
 {
@@ -68,7 +68,22 @@ void SecondScreen::update()
 
         bob->setPosition(bob->getX()+changeByX, bob->getY()+changeByY);
     }
+
+    Button* button = entityman.get_actor_as_different_class<Button>("Button");
+    button->setPosition(100, 100);
+
     entityman.update();
+
+    if (button->isPressed())
+    {
+        if (!alreadyPressed)
+        {
+            alreadyPressed = true;
+            std::cout << "ButtonPress" << std::endl;
+        }
+    } else {
+        alreadyPressed = false;
+    }
 }
 
 void SecondScreen::render()
@@ -80,8 +95,13 @@ void SecondScreen::render()
 SecondScreen::SecondScreen(GameData& gamedata)
 : State{ gamedata } 
 {
+    gd.textman.addTexture("./bin/res/Test.png", "Button");
+    
     Bob* bob = new Bob(gamedata);
+    Button* btn = new Button(gamedata, *gd.textman.getTexture("Button"));
+
     entityman.add_actor(bob, "Bob");
+    entityman.add_actor(btn, "Button");
 }
 
 SecondScreen::~SecondScreen()

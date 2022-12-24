@@ -14,7 +14,7 @@ class Actor
     public:
         Actor(GameData& gamedata) : gd{gamedata} {}
 
-        void setPosition(int x, int y)          { xPos = x; yPos = y; }
+        void setPosition(int x, int y)          { xPos = x; yPos = y; sprite.setPosition(xPos, yPos); }
         int getX()                              { return xPos; }
         int getY()                              { return yPos; }
         int getHeight()                         { return sprite.getTextureRect().height; }
