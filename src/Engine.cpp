@@ -11,9 +11,15 @@ void Engine::handleEvents(sf::Event& ev)
     }
 }
 
+int GameData::randi_range(int min, int max)
+{
+    return (rand() % max) + min;
+}
+
 void Engine::start(int screenWidth, int screenHeight, std::string title)
 {
     std::cout << "PlotEngine v1.0.0" << std::endl;
+    srand(time(NULL));
     gd.window.create(sf::VideoMode(screenWidth, screenHeight), title, sf::Style::Titlebar | sf::Style::Close);
     gd.window.setFramerateLimit(60);
     sf::Event event;

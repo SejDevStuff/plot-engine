@@ -45,6 +45,10 @@ int changeByX = 10;
 int changeByY = 10;
 bool alreadyPressed = false;
 
+int r = 255;
+int g = 255;
+int b = 255;
+
 void SecondScreen::update()
 {
     Actor* bob = entityman.get_actor("Bob");
@@ -74,31 +78,31 @@ void SecondScreen::update()
 
     entityman.update();
 
-    if (button->isPressed())
+    if (button->isPressedNoEcho())
     {
-        if (!alreadyPressed)
-        {
-            alreadyPressed = true;
-            std::cout << "ButtonPress" << std::endl;
-        }
-    } else {
-        alreadyPressed = false;
+        r = gd.randi_range(127, 255);
+        g = gd.randi_range(127, 255);
+        b = gd.randi_range(127, 255);
     }
 }
 
 void SecondScreen::render()
 {
     entityman.render();
+    sf::Text txt = gd.fontman.get_text(gd.fontman.get_font("Roboto"), "HELLO, WORLD", 50, sf::Color(r, g, b), sf::Text::Bold);
+    gd.window.draw(txt);
 }
 
 
 SecondScreen::SecondScreen(GameData& gamedata)
 : State{ gamedata } 
 {
-    gd.textman.addTexture("./bin/res/Test.png", "Button");
+    gd.textman.addTexture("./bin/res/Button.png", "Button");
+    gd.fontman.add_font("./bin/res/Roboto-Regular.ttf", "Roboto");
     
     Bob* bob = new Bob(gamedata);
-    Button* btn = new Button(gamedata, *gd.textman.getTexture("Button"));
+    Button* btn = new Button(gamedata, *gd.textman.getTexture("Button"), gd.fontman.get_text(gd.fontman.get_font("Roboto"), "Button!", 32, sf::Color::White, sf::Text::Bold) );
+    btn->setText("Change colour!");
 
     entityman.add_actor(bob, "Bob");
     entityman.add_actor(btn, "Button");
